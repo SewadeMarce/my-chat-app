@@ -3,7 +3,8 @@
     "**/*",
     "**/.server/**/*",
     "**/.client/**/*",
-    ".react-router/types/**/*"
+    ".react-router/types/**/*",
+    "server.ts"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
@@ -11,6 +12,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "bundler",
+    // Option obligatoire pour React Router v7
+    "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "rootDirs": [".", "./.react-router/types"],
     "paths": {
