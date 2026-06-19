@@ -1,7 +1,11 @@
 import { Link } from "react-router";
 import { SparklesIcon, ArrowRightIcon } from "lucide-react";
 import BorderAnimatedContainer from "~/components/BorderAnimatedContainer";
+import { User } from "~/services/data.service";
 
+export async function clientLoader() {
+  
+}
 function HomePage() {
   return (
     <div className="w-full flex items-center justify-center p-4 bg-slate-900 min-h-screen">

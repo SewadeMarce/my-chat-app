@@ -1,87 +1,110 @@
-# Welcome to React Router!
-
-A modern, production-ready template for building full-stack React applications using React Router.
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
+chat-app/
+│
+├── app/
+│   │
+│   ├── components/
+│   │   ├── chat/
+│   │   │   ├── ChatContainer.tsx
+│   │   │   ├── ChatHeader.tsx
+│   │   │   ├── MessageInput.tsx
+│   │   │   ├── MessageList.tsx
+│   │   │   └── MessageItem.tsx
+│   │   │
+│   │   ├── sidebar/
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── UserItem.tsx
+│   │   │   └── OnlineUsers.tsx
+│   │   │
+│   │   ├── layout/
+│   │   │   ├── MainLayout.tsx
+│   │   │   └── AuthLayout.tsx
+│   │   │
+│   │   └── ui/
+│   │       ├── Button.tsx
+│   │       ├── Input.tsx
+│   │       ├── Loader.tsx
+│   │       └── Modal.tsx
+│   │
+│   ├── hooks/
+│   │   ├── useAuth.ts
+│   │   ├── useSocket.ts
+│   │   ├── useMessages.ts
+│   │   └── useConversations.ts
+│   │
+│   ├── stores/
+│   │   ├── authStore.ts
+│   │   ├── chatStore.ts
+│   │   └── socketStore.ts
+│   │
+│   ├── services/
+│   │   ├── api.ts
+│   │   ├── auth.client.ts
+│   │   ├── user.client.ts
+│   │   ├── message.client.ts
+│   │   └── socket.client.ts
+│   │
+│   ├── routes/
+│   │   ├── login.tsx
+│   │   ├── register.tsx
+│   │   ├── chat.tsx
+│   │   ├── profile.tsx
+│   │   └── api/
+│   │
+│   ├── utils/
+│   │   ├── formatDate.ts
+│   │   ├── constants.ts
+│   │   └── validators.ts
+│   │
+│   ├── root.tsx
+│   └── routes.ts
+│
+├── server/
+│   │
+│   ├── config/
+│   │   ├── database.ts
+│   │   └── socket.ts
+│   │
+│   ├── models/
+│   │   ├── User.ts
+│   │   ├── Message.ts
+│   │   └── Conversation.ts
+│   │
+│   ├── controllers/
+│   │   ├── authController.ts
+│   │   ├── userController.ts
+│   │   ├── messageController.ts
+│   │   └── conversationController.ts
+│   │
+│   ├── middleware/
+│   │   ├── auth.ts
+│   │   ├── validate.ts
+│   │   └── errorHandler.ts
+│   │
+│   ├── routes/
+│   │   ├── authRoutes.ts
+│   │   ├── userRoutes.ts
+│   │   ├── messageRoutes.ts
+│   │   └── conversationRoutes.ts
+│   │
+│   ├── services/
+│   │   ├── authService.ts
+│   │   ├── messageService.ts
+│   │   └── conversationService.ts
+│   │
+│   ├── sockets/
+│   │   ├── chatSocket.ts
+│   │   └── presenceSocket.ts
+│   │
+│   ├── utils/
+│   │   ├── generateToken.ts
+│   │   └── asyncHandler.ts
+│   │
+│   └── index.ts
+│
+├── public/
+│
+├── .env
+├── .env.example
 ├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+├── react-router.config.ts
+└── tsconfig.json
