@@ -6,10 +6,10 @@ export default [
          route("login", "pages/login.tsx"),
          route("signup", "pages/signUp.tsx"),
      ]),
-    // route("/chat-app", "layout/chat.tsx", [
-    //     index("pages/chat.tsx"),
-    //     route(":_id", "pages/_id.tsx")
-    // ]),
+     route("/chat-app", "layout/chat.tsx", [
+         index("pages/chat.tsx"),
+         route(":_id", "pages/_id.tsx")
+     ]),
 
 
 ] satisfies RouteConfig;
