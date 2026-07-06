@@ -19,12 +19,7 @@ export async function clientLoader() {
     myChatPartners
   }
 }
-// export async function clientAction({ request }: Route.ClientActionArgs) {
-//   const formData = await request.formData();
-//   const json = await request.json();
-//   console.log({ json });
 
-// }
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
   const condition = formData.get('condition');

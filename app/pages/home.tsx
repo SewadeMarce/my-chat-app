@@ -1,15 +1,15 @@
 import { Link } from "react-router";
 import { SparklesIcon, ArrowRightIcon } from "lucide-react";
 import BorderAnimatedContainer from "~/components/BorderAnimatedContainer";
-//import { User } from "~/services/data.service";
-//import { redirect } from "react-router";
+import { User } from "~/services/data.service";
+import { redirect } from "react-router";
 import PageLoader from "~/components/ui/PageLoader";
 
-// export async function clientLoader() {
-//   await User.checkAuth()
-//   if (User.authUser) throw redirect("/chat-app");
+export async function clientLoader() {
+  await User.checkAuth()
+  if (User.authUser) throw redirect("/chat-app");
 
-// }
+}
 export function HydrateFallback() {
 
   return (
