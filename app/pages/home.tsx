@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { SparklesIcon, ArrowRightIcon } from "lucide-react";
-import BorderAnimatedContainer from "~/components/ui/BorderAnimatedContainer";
-import { User } from "~/services/data.service";
-import { redirect } from "react-router";
+import BorderAnimatedContainer from "~/components/BorderAnimatedContainer";
+//import { User } from "~/services/data.service";
+//import { redirect } from "react-router";
 import PageLoader from "~/components/ui/PageLoader";
 
 // export async function clientLoader() {
