@@ -10,7 +10,7 @@ import { socketAuthMiddleware } from "./middleware/socket.auth.middleware.ts";
 const app = express();
 app.use(express.json({ limit: "5mb" })); // requête JSON
 app.use(cookieParser());
-app.use('/api',apiRouter);
+app.use('/api',apiRouter)
 
 
 export function getReceiverSocketId(userId:string) {
