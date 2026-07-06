@@ -1,6 +1,6 @@
 import { createRequestHandler } from "@react-router/express";
 import express from "express";
- import app from "./server/app.ts";
+ import app, { server } from "./server/app.ts";
 import { PORT } from "./server/config/env.ts";
 import  connectDB  from "./server/config/db.ts";
 
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === "development") {
     }),
   );
 }
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   connectDB()
 });
