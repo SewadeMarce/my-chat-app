@@ -1,26 +1,30 @@
-import { useState } from "react";
+import { useEffect,  } from "react";
 import { MessageCircleIcon, LockIcon, MailIcon, UserIcon, LoaderIcon } from "lucide-react";
-import { Form, Link, redirect, useActionData } from "react-router";
-import BorderAnimatedContainer from "~/components/BorderAnimatedContainer";
-import { useStateAction } from "~/hooks/useHooks";
 import { User } from "~/services/data.service";
 import type { Route } from "./+types/signUp";
+import { Form, Link, redirect, useNavigation } from "react-router";
+import toast from "react-hot-toast";
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
   const email = formData.get('email')
   const fullName = formData.get('fullName')
   const password = formData.get('password')
-  console.log({ fullName, email, password });
 
   await User.signup({ fullName, email, password })
-  if (User.isLoggedIn) throw redirect("/chat-app");
-
+  if (User.authUser) throw redirect("/chat-app");
+  return User.erreur
 }
-function SignUpPage() {
-  const [formData, setFormData] = useState({ fullName: "", email: "", password: "" });
-  const { loading: isSigningUp } = useStateAction('/signup')
+function SignUpPage({ actionData }: Route.ComponentProps) {
+
+  const navigation = useNavigation();
+  const isSigningUp = navigation.formAction === '/signup';
 
 
+  useEffect(() => {
+    if (actionData) {
+      toast.error(actionData)
+    }
+  }, [actionData])
   return (
 
     <div className="w-full flex flex-col md:flex-row">
@@ -44,9 +48,7 @@ function SignUpPage() {
 
                 <input
                   type="text"
-                  value={formData.fullName}
                   name="fullName"
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   className="input"
                   placeholder="Jean Dupont"
                 />
@@ -61,9 +63,7 @@ function SignUpPage() {
 
                 <input
                   type="email"
-                  value={formData.email}
                   name="email"
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="input"
                   placeholder="jean.dupont@example.com"
                 />
@@ -78,9 +78,7 @@ function SignUpPage() {
 
                 <input
                   type="password"
-                  value={formData.password}
                   name="password"
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="input"
                   placeholder="Entrez votre mot de passe"
                 />
@@ -106,13 +104,14 @@ function SignUpPage() {
       </div>
 
       {/* ILLUSTRATION DU FORMULAIRE - CÔTÉ DROIT */}
-      <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-gradient-to-bl from-slate-800/20 to-transparent">
+      <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-linear-to-bl from-slate-800/20 to-transparent">
         <div>
           <img
             src="/signup.png"
             alt="Personnes utilisant des appareils mobile"
             className="w-full h-auto object-contain"
           />
+
           <div className="mt-6 text-center">
             <h3 className="text-xl font-medium text-cyan-400">Commencez dès aujourd'hui</h3>
 

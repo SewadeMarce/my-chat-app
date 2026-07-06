@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageCircleIcon, MailIcon, LoaderIcon, LockIcon } from "lucide-react";
 import { Form, Link, redirect, useActionData } from "react-router";
-import BorderAnimatedContainer from "~/components/BorderAnimatedContainer";
-import { useStateAction } from "~/hooks/useHooks";
 import type { Route } from "./+types/login";
 import { User } from "~/services/data.service";
+import { useNavigation } from "react-router";
+import toast from "react-hot-toast";
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
     const formData = await request.formData();
@@ -13,16 +13,18 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
     const password = formData.get('password')
 
     await User.login({ email, password })
-    if (User.isLoggedIn) {
-
-        throw redirect("/chat-app");
-    }
+    if (User.authUser) throw redirect("/chat-app");
+    return User.erreur
 }
-function LoginPage() {
-    const { loading: isLoggingIn } = useStateAction('/login')
-    const [formData, setFormData] = useState({ email: "", password: "" });
+function LoginPage({ actionData }: Route.ComponentProps) {
+    const navigation = useNavigation();
+    const isLoggingIn = navigation.formAction === '/login';
 
-
+    useEffect(() => {
+        if (actionData) {
+            toast.error(actionData)
+        }
+    }, [actionData])
     return (
 
         <div className="w-full flex flex-col md:flex-row">
@@ -46,9 +48,7 @@ function LoginPage() {
 
                                 <input
                                     type="email"
-                                    value={formData.email}
                                     name="email"
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     className="input text-slate-400"
                                     placeholder="jean.dupont@example.com"
                                 />
@@ -64,8 +64,6 @@ function LoginPage() {
                                 <input
                                     type="password"
                                     name="password"
-                                    value={formData.password}
-                                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                     className="input text-slate-400"
                                     placeholder="Entrez votre mot de passe"
                                 />

@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import User from "../models/User.ts";
-import { generateToken, Session } from "../lib/utils.ts";
+import { Session } from "../lib/utils.ts";
 import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.ts";
 

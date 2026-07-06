@@ -1,25 +1,8 @@
-import jwt from "jsonwebtoken";
 import User from "../models/User.ts";
 import type { NextFunction, Request, Response } from "express";
-import { ENV } from "../config/env.ts";
-import type { Types } from "mongoose";
 import { Session } from "../lib/utils.ts";
 
-declare global {
-  namespace Express {
-    interface Request {
-      userId?: string;
-      user?: UserPayload;
-    }
-    interface UserPayload {
-      _id: Types.ObjectId;
-      fullName: string;
-      email: string;
-      profilePic?: string;
-    }
 
-  }
-}
 
 export const protectRoute = async (req: Request, res: Response, next: NextFunction) => {
   try {

@@ -1,5 +1,5 @@
 import jwt, { type Secret } from "jsonwebtoken";
-import { ENV } from "../config/env.ts";
+import { JWT_SECRET,NODE_ENV } from "../config/env.ts";
 import type { Response } from "express";
 import type { Types } from "mongoose";
 interface UserPayload {
@@ -9,7 +9,6 @@ interface UserPayload {
       profilePic?: string;
     }
 export const generateToken = (userId: string, res: Response) => {
-  const { JWT_SECRET } = ENV;
   if (!JWT_SECRET) {
     throw new Error("JWT_SECRET non configuré");
   }
@@ -22,14 +21,14 @@ export const generateToken = (userId: string, res: Response) => {
     maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     httpOnly: true, // empêche les attaques XSS : cross-site scripting
     sameSite: "strict", // protège contre les attaques CSRF
-    secure: ENV.NODE_ENV === "development" ? false : true,
+    secure: NODE_ENV === "development" ? false : true,
   });
 
   return token;
 };
 export const Session = {
   token:"",
-  JWT_SECRET: ENV.JWT_SECRET,
+  JWT_SECRET: JWT_SECRET,
 
   generate: function (userPayload:UserPayload) {
     if (!this.JWT_SECRET) {
@@ -52,7 +51,7 @@ export const Session = {
     maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     httpOnly: true, // empêche les attaques XSS : cross-site scripting
     sameSite: "strict", // protège contre les attaques CSRF
-    secure: ENV.NODE_ENV === "development" ? false : true,
+    secure: NODE_ENV === "development" ? false : true,
   });
   },
   session:function (userPayload:UserPayload,res:Response) {
@@ -66,6 +65,3 @@ export const Session = {
   }
 
 }
-
-// http://localhost
-// https://dsmakmk.com

@@ -1,18 +1,11 @@
 import { createRequestHandler } from "@react-router/express";
 import express from "express";
-// import app, { server } from "./server/app.ts";
+ import app from "./server/app.ts";
 // import { connectDB } from "./server/config/db.ts";
 // import { ENV } from "./server/config/env.ts";
 
-import cookieParser from "cookie-parser";
 import { PORT } from "./server/config/env.ts";
-import { connectDB } from "./server/config/db.ts";
-
-
-const app = express();
-app.use(express.json({ limit: "5mb" })); // requête JSON
-app.use(cookieParser());
-app.use('/api',(req,res)=>res.send("L'API fonctionne !"))
+import  connectDB  from "./server/config/db.ts";
 
 if (process.env.NODE_ENV === "development") {
   console.log('Serveur en dev');
