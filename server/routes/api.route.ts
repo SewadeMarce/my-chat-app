@@ -1,9 +1,9 @@
 import { Router } from "express";
 import authRouter from "./routers/auth.route.ts";
+import messagesRouter from "./routers/message.route.ts";
 
 const apiRouter = Router()
 
-apiRouter.use('/api',(req,res)=>res.send("L'API fonctionne !"))
 apiRouter.use('/auth',authRouter)
-
+apiRouter.use('/messages',messagesRouter)
 export default apiRouter;

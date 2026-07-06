@@ -2,10 +2,11 @@ import type { Request, Response } from "express";
 import User from "../models/User.ts";
 import Message from "../models/Message.ts";
 import cloudinary from "../lib/cloudinary.ts";
+import { getReceiverSocketId, io } from "../app.ts";
 
 
 
-export const getAllContacts = async (req:Request, res:Response) => {
+export const getAllContacts = async (req: Request, res: Response) => {
   try {
     const loggedInUserId = req.user?._id;
     const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
@@ -19,7 +20,7 @@ export const getAllContacts = async (req:Request, res:Response) => {
 
 
 
-export const getChatPartners = async (req:Request, res:Response) => {
+export const getChatPartners = async (req: Request, res: Response) => {
   try {
     const loggedInUserId = req.user?._id;
 
@@ -41,17 +42,19 @@ export const getChatPartners = async (req:Request, res:Response) => {
     const chatPartners = await User.find({ _id: { $in: chatPartnerIds } }).select("-password");
 
     res.status(200).json(chatPartners);
-  } catch (error:any) {
+  } catch (error: any) {
     console.error("Erreur dans getChatPartners : ", error?.message);
     res.status(500).json({ error: "Erreur interne du serveur" });
   }
 };
 
 
-export const getMessagesByUserId = async (req:Request, res:Response) => {
+export const getMessagesByUserId = async (req: Request, res: Response) => {
   try {
     const myId = req.user?._id;
     const { id: userToChatId } = req.params;
+
+    const partners = await User.findOne({ _id: userToChatId }).select("-password");
 
     const messages = await Message.find({
       $or: [
@@ -59,16 +62,18 @@ export const getMessagesByUserId = async (req:Request, res:Response) => {
         { senderId: userToChatId, receiverId: myId },
       ],
     });
-
-    res.status(200).json(messages);
-  } catch (error:any) {
+    res.status(200).json({
+      messages,
+      partners
+    });
+  } catch (error: any) {
     console.log("Erreur dans le contrôleur des messages : ", error.message);
     res.status(500).json({ error: "Erreur interne du serveur" });
   }
 };
 
 
-export const sendMessage = async (req:Request, res:Response) => {
+export const sendMessage = async (req: Request, res: Response) => {
   try {
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
@@ -101,13 +106,13 @@ export const sendMessage = async (req:Request, res:Response) => {
 
     await newMessage.save();
 
-   // const receiverSocketId = getReceiverSocketId(receiverId);
-    // if (receiverSocketId) {
-    //   io.to(receiverSocketId).emit("newMessage", newMessage);
-    // }
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
 
     res.status(201).json(newMessage);
-  } catch (error:any) {
+  } catch (error: any) {
     console.log("Erreur dans le contrôleur d'envoi de message : ", error.message);
     res.status(500).json({ error: "Erreur interne du serveur" });
   }
