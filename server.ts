@@ -1,9 +1,6 @@
 import { createRequestHandler } from "@react-router/express";
 import express from "express";
  import app from "./server/app.ts";
-// import { connectDB } from "./server/config/db.ts";
-// import { ENV } from "./server/config/env.ts";
-
 import { PORT } from "./server/config/env.ts";
 import  connectDB  from "./server/config/db.ts";
 
