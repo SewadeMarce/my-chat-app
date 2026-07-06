@@ -5,6 +5,8 @@ import express from "express";
 // import { ENV } from "./server/config/env.ts";
 
 import cookieParser from "cookie-parser";
+import { PORT } from "./server/config/env.ts";
+import { connectDB } from "./server/config/db.ts";
 
 
 const app = express();
@@ -40,8 +42,7 @@ if (process.env.NODE_ENV === "development") {
     }),
   );
 }
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
- // connectDB()
+  connectDB()
 });
