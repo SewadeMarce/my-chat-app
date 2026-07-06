@@ -1,110 +1,106 @@
-chat-app/
-│
-├── app/
-│   │
-│   ├── components/
-│   │   ├── chat/
-│   │   │   ├── ChatContainer.tsx
-│   │   │   ├── ChatHeader.tsx
-│   │   │   ├── MessageInput.tsx
-│   │   │   ├── MessageList.tsx
-│   │   │   └── MessageItem.tsx
-│   │   │
-│   │   ├── sidebar/
-│   │   │   ├── Sidebar.tsx
-│   │   │   ├── UserItem.tsx
-│   │   │   └── OnlineUsers.tsx
-│   │   │
-│   │   ├── layout/
-│   │   │   ├── MainLayout.tsx
-│   │   │   └── AuthLayout.tsx
-│   │   │
-│   │   └── ui/
-│   │       ├── Button.tsx
-│   │       ├── Input.tsx
-│   │       ├── Loader.tsx
-│   │       └── Modal.tsx
-│   │
-│   ├── hooks/
-│   │   ├── useAuth.ts
-│   │   ├── useSocket.ts
-│   │   ├── useMessages.ts
-│   │   └── useConversations.ts
-│   │
-│   ├── stores/
-│   │   ├── authStore.ts
-│   │   ├── chatStore.ts
-│   │   └── socketStore.ts
-│   │
-│   ├── services/
-│   │   ├── api.ts
-│   │   ├── auth.client.ts
-│   │   ├── user.client.ts
-│   │   ├── message.client.ts
-│   │   └── socket.client.ts
-│   │
-│   ├── routes/
-│   │   ├── login.tsx
-│   │   ├── register.tsx
-│   │   ├── chat.tsx
-│   │   ├── profile.tsx
-│   │   └── api/
-│   │
-│   ├── utils/
-│   │   ├── formatDate.ts
-│   │   ├── constants.ts
-│   │   └── validators.ts
-│   │
-│   ├── root.tsx
-│   └── routes.ts
-│
-├── server/
-│   │
-│   ├── config/
-│   │   ├── database.ts
-│   │   └── socket.ts
-│   │
-│   ├── models/
-│   │   ├── User.ts
-│   │   ├── Message.ts
-│   │   └── Conversation.ts
-│   │
-│   ├── controllers/
-│   │   ├── authController.ts
-│   │   ├── userController.ts
-│   │   ├── messageController.ts
-│   │   └── conversationController.ts
-│   │
-│   ├── middleware/
-│   │   ├── auth.ts
-│   │   ├── validate.ts
-│   │   └── errorHandler.ts
-│   │
-│   ├── routes/
-│   │   ├── authRoutes.ts
-│   │   ├── userRoutes.ts
-│   │   ├── messageRoutes.ts
-│   │   └── conversationRoutes.ts
-│   │
-│   ├── services/
-│   │   ├── authService.ts
-│   │   ├── messageService.ts
-│   │   └── conversationService.ts
-│   │
-│   ├── sockets/
-│   │   ├── chatSocket.ts
-│   │   └── presenceSocket.ts
-│   │
-│   ├── utils/
-│   │   ├── generateToken.ts
-│   │   └── asyncHandler.ts
-│   │
-│   └── index.ts
-│
-├── public/
-│
-├── .env
-├── .env.example
-├── package.json
-├── react-router.config.ts
-└── tsconfig.json
+# My Chat App
+
+My Chat App est une application de messagerie moderne en temps réel, construite avec React Router, Express, TypeScript, Socket.IO et MongoDB. Elle permet de créer un compte, de se connecter, de discuter avec d’autres utilisateurs et de gérer son profil de manière fluide.
+
+## Fonctionnalités
+
+- Authentification utilisateur avec login, signup et logout
+- Messagerie en temps réel via Socket.IO
+- Liste des contacts et conversations récentes
+- Statut des utilisateurs en ligne
+- Mise à jour du profil avec photo
+- Interface moderne et responsive
+- Gestion des erreurs et notifications utilisateur
+
+## Stack technique
+
+- Frontend : React, React Router, TypeScript, Tailwind CSS, Zustand, Lucide React
+- Backend : Express, Socket.IO, Mongoose, JWT, Cookie Parser
+- Services externes : Cloudinary, Resend
+- Outils : Vite, React Hot Toast
+
+## Prérequis
+
+Avant de lancer l’application, assurez-vous d’avoir :
+
+- Node.js 20 ou plus
+- npm
+- Une instance MongoDB accessible
+
+## Installation
+
+1. Clonez le dépôt :
+   ```bash
+   git clone <url-du-repo>
+   cd my-chat-app
+   ```
+
+2. Installez les dépendances :
+   ```bash
+   npm install
+   ```
+
+3. Créez un fichier .env à la racine du projet et ajoutez les variables suivantes :
+   ```env
+   PORT=3000
+   NODE_ENV=development
+   MONGO_URI=mongodb://localhost:27017/my-chat-app
+   JWT_SECRET=votre_secret_jwt
+   CLIENT_URL=http://localhost:3000
+
+   RESEND_API_KEY=votre_cle_resend
+   EMAIL_FROM=votre_email@example.com
+   EMAIL_FROM_NAME=My Chat App
+
+   CLOUDINARY_CLOUD_NAME=votre_cloud_name
+   CLOUDINARY_API_KEY=votre_api_key
+   CLOUDINARY_API_SECRET=votre_api_secret
+   ```
+
+## Lancer l’application
+
+### Mode développement
+
+```bash
+npm run dev
+```
+
+L’application sera disponible sur :
+```text
+http://localhost:3000
+```
+
+### Build de production
+
+```bash
+npm run build
+```
+
+### Démarrage en production
+
+```bash
+npm start
+```
+
+### Vérification TypeScript
+
+```bash
+npm run typecheck
+```
+
+## Structure du projet
+
+```text
+app/            # Frontend React Router
+server/         # Backend Express et API
+public/         # Fichiers statiques
+Dockerfile      # Configuration Docker
+```
+
+## Notes
+
+- L’authentification est gérée via des cookies sécurisés.
+- Les messages et les données utilisateurs sont stockés dans MongoDB.
+- Les images de profil peuvent être téléchargées et stockées via Cloudinary.
+
+Si vous souhaitez, je peux aussi vous proposer une version encore plus complète du README avec une section “Captures d’écran”, “Architecture”, et “Contribution”.
