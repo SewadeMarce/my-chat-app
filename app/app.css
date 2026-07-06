@@ -18,14 +18,7 @@
 .auth-input-icon {
   @apply absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 size-5;
 }
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
-}
 
 .auth-input-label {
   @apply block text-sm font-medium text-slate-300 mb-2;

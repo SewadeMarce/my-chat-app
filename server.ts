@@ -1,12 +1,20 @@
 import { createRequestHandler } from "@react-router/express";
 import express from "express";
-import app from "./server/app.ts";
-import { connectDB } from "./server/config/db.ts";
-import { ENV } from "./server/config/env.ts";
+// import app, { server } from "./server/app.ts";
+// import { connectDB } from "./server/config/db.ts";
+// import { ENV } from "./server/config/env.ts";
+
+import cookieParser from "cookie-parser";
+
+
+const app = express();
+app.use(express.json({ limit: "5mb" })); // requête JSON
+app.use(cookieParser());
+app.use('/api',(req,res)=>res.send("L'API fonctionne !"))
 
 if (process.env.NODE_ENV === "development") {
   console.log('Serveur en dev');
-  
+
   const viteDevServer = await import("vite").then((vite) =>
     vite.createServer({
       server: { middlewareMode: true },
@@ -32,8 +40,8 @@ if (process.env.NODE_ENV === "development") {
     }),
   );
 }
-
-app.listen(ENV.PORT, () => {
-  console.log(`Server is running on http://localhost:${ENV.PORT}`);
-  connectDB()
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+ // connectDB()
 });
