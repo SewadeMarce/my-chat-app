@@ -16,7 +16,7 @@ export const Sidebare = ({ onlineUsers, isSoundEnabled, toggleSound, onClose }:
     <>
       <div className="h-full w-full max-w-[20rem] bg-slate-800/50 backdrop-blur-sm flex flex-col border-r border-slate-700/60 lg:w-80 lg:max-w-none">
         <div className="flex items-center justify-between border-b border-slate-700/60 p-4 lg:hidden">
-          <p className="text-sm font-medium text-slate-300">Menu</p>
+          <p className="text-sm font-medium text-slate-300"></p>
           <button
             type="button"
             onClick={onClose}

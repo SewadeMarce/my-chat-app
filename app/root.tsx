@@ -5,14 +5,20 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  type MetaFunction,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import PageLoader from "./components/ui/PageLoader";
 import { Decors } from "./components/ui/Decors";
 import { Toaster } from "react-hot-toast";
-
+export const meta:MetaFunction = ()=>[
+  {
+    title: "Chat App",
+    name: "description",
+    content: "Un simple chat application construit avec React et TypeScript"
+  }
+]
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
