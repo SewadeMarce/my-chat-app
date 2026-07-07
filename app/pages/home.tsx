@@ -21,7 +21,7 @@ function HomePage() {
     <div className="w-full flex items-center justify-center p-4 bg-slate-900 min-h-screen">
       <div className="relative w-full max-w-6xl md:h-[800px] h-[750px]">
         <BorderAnimatedContainer>
-          <div className="w-full h-full grid gap-8 md:grid-cols-[58%_42%]">
+          <div className="w-full h-full grid gap-8 md:grid-cols-[58%_42%] overflow-y-auto">
             <div className="p-8 flex flex-col justify-center">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 text-cyan-300 mb-6 text-sm font-medium">
                 <SparklesIcon className="w-5 h-5" />
