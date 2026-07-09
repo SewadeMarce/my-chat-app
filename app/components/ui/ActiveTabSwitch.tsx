@@ -6,7 +6,7 @@ function ActiveTabSwitch({ active, setActive } :{active: string,setActive: (tab:
       <button
         type="button"
         onClick={() => setActive("chats")}
-        className={`tab cursor-pointer ${active === "chats" ? "tab-active text-cyan-400" : "text-slate-400"}`}
+        className={`px-4 py-2 font-medium cursor-pointer ${active === "chats" ? " text-cyan-400 " : "text-slate-400"}  bg-cyan-500/10  rounded-full hover:bg-cyan-500/20 transition-colors`}
       >
         Conversations
       </button>
@@ -14,7 +14,7 @@ function ActiveTabSwitch({ active, setActive } :{active: string,setActive: (tab:
       <button
         type="button"
         onClick={() => setActive("contacts")}
-        className={`tab cursor-pointer ${active === "contacts" ? "tab-active text-cyan-400" : "text-slate-400"}`}
+        className={`px-4 py-2 font-medium cursor-pointer ${active === "contacts" ? " text-cyan-400" : "text-slate-400"}   bg-cyan-500/10 rounded-full hover:bg-cyan-500/20 transition-colors`}
       >
         Contacts
       </button>

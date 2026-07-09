@@ -33,13 +33,13 @@ function MessageForm() {
         text: fecther.formData.get('text') as string,
         image: fecther.formData.get('image') as string,
       }
+      if (Socket.isSoundEnabled) Socket.playRandomKeyStrokeSound();
       Socket.optimisticMessage(data)
     };
   }, [fecther.formData])
   useEffect(() => {
     if (fecther.data) {
       Socket.onMessage(fecther.data)
-      if (Socket.isSoundEnabled) Socket.playRandomKeyStrokeSound();
       setText("");
       setImagePreview("");
     }

@@ -5,11 +5,11 @@ import { User } from "~/services/data.service";
 import { redirect } from "react-router";
 import PageLoader from "~/components/ui/PageLoader";
 
-export async function clientLoader() {
-  await User.checkAuth()
-  if (User.authUser) throw redirect("/chat-app");
+ export async function clientLoader() {
+   await User.checkAuth()
+   if (User.authUser) throw redirect("/chat-app");
 
-}
+ }
 export function HydrateFallback() {
 
   return (
@@ -48,12 +48,12 @@ function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent" />
                 <div className="relative z-10 h-full flex flex-col justify-end p-6">
                   <h2 className="text-xl font-semibold text-cyan-300">Conversations fluides</h2>
-                  <p className="mt-2 text-slate-200 text-sm mb-4">
+                  <p className="mt-2 text-slate-100  font-semibold text-sm mb-4">
                     Accédez rapidement à vos chats, retrouvez votre historique et continuez la discussion.
                   </p>
                   <Link
                     to="/login"
-                    className="inline-flex items-center justify-center rounded-xl border border-cyan-500 bg-cyan-500/10 px-6 py-3 text-sm font-medium text-cyan-300 hover:bg-cyan-500 hover:text-slate-950 transition"
+                    className="inline-flex items-center justify-center rounded-xl border border-cyan-500 bg-cyan-500/10 px-6 py-3 text-sm font-medium text-white hover:bg-cyan-500 hover:text-slate-950 transition"
                   >
                     Se connecter
                   </Link>
@@ -69,12 +69,12 @@ function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent" />
                 <div className="relative z-10 h-full flex flex-col justify-end p-6">
                   <h2 className="text-xl font-semibold text-cyan-300">Profils personnalisés</h2>
-                  <p className="mt-2 text-slate-200 text-sm mb-4">
+                  <p className="mt-2 text-slate-100 text-sm font-semibold mb-4">
                     Personnalisez votre photo de profil et démarquez-vous dans vos conversations.
                   </p>
                   <Link
                     to="/signup"
-                    className="inline-flex items-center justify-center rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
+                    className="inline-flex items-center justify-center rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-cyan-400"
                   >
                     Commencer
                     <ArrowRightIcon className="w-4 h-4 ml-2" />

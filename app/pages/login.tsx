@@ -71,12 +71,14 @@ function LoginPage({ actionData }: Route.ComponentProps) {
                         </div>
 
                         {/* SUBMIT BUTTON */}
-                        <button className="auth-btn text-white" type="submit" disabled={isLoggingIn}>
+                        <button
+                            className="w-full rounded-xl border border-cyan-500 bg-cyan-500/10 px-6 py-3 text-sm font-medium text-white hover:bg-cyan-500 hover:text-slate-950 transition"
+                        >
                             {isLoggingIn ? (
-                                <LoaderIcon className="w-full h-5 animate-spin text-center" />
-                            ) : (
-                                "Se connecter"
-                            )}
+                            <LoaderIcon className="w-full h-5 animate-spin text-center" />
+                        ) : (
+                            "Se connecter"
+                        )}
                         </button>
                     </Form>
 

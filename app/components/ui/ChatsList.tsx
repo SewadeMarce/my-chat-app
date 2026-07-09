@@ -1,19 +1,21 @@
 import NoChatsFound from "./NoChatsFound";
-import { Link, useAsyncValue, } from "react-router";
+import { Link, useAsyncValue, useFetcher, } from "react-router";
 import type { userType } from "~/types";
 
-function ChatsList({ onlineUsers, }: { onlineUsers?: string[] }) {
+function ChatsList({ onlineUsers, setActive, onClose }: { onlineUsers?: string[], setActive: (arg: string) => void, onClose?: () => void }) {
 
   const MyChatPartners = useAsyncValue() as userType[];
-
+const fetcher = useFetcher()
   return (
     <>
-      {MyChatPartners.length === 0 ? <NoChatsFound /> :
+      {MyChatPartners.length === 0 ? <NoChatsFound setActive={setActive} /> :
         <>  {MyChatPartners.map((chat) => (
           <Link
             to={`${chat._id}`}
             key={chat._id}
             className="bg-cyan-500/10 p-4 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors"
+            onClick={onClose}
+            onMouseMove={()=>fetcher.load(`${chat._id}`)}
           >
             <div className="flex items-center gap-3">
               <div className={`avatar ${onlineUsers?.includes(chat._id) ? "online" : "offline"}`}>

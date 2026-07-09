@@ -4,12 +4,17 @@ import NoChatHistoryPlaceholder from "~/components/ui/NoChatHistoryPlaceholder";
 import { MessagesService, } from "~/services/data.service";
 import type { Route } from "./+types/_id";
 import { useEffect } from "react";
-import { redirect, useParams } from "react-router";
+import { redirect, useNavigation, useParams } from "react-router";
 import MessagesLoadingSkeleton from "~/components/ui/MessagesLoadingSkeleton";
 import { useSocketContext } from "~/hooks/useHook";
 import MessagesList from "~/components/ui/MessageList";
+import PageLoader from "~/components/ui/PageLoader";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+
+  const cached = sessionStorage.getItem(`${params._id}`)
+  //if (cached) return JSON.parse(cached)
+
   const {
     messages,
     partners
@@ -17,6 +22,10 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   if (!partners) {
     return redirect('/chat-app')
   }
+  // sessionStorage.setItem(`${params._id}`, JSON.stringify({
+  //   messages,
+  //   partners
+  // }))
   return {
     messages,
     partners
@@ -39,18 +48,23 @@ export function HydrateFallback() {
     <MessagesLoadingSkeleton />
   )
 }
-clientLoader.hydrate = true as const 
+clientLoader.hydrate = true as const
 
 export default function ChatMessages({ loaderData }: Route.ComponentProps) {
 
 
   const params = useParams()
   const Socket = useSocketContext();
+  const navigation = useNavigation();
+  const isLoading = navigation.state === 'loading'
   useEffect(() => {
     Socket.initmessages(loaderData.messages)
     Socket.initreceiverId(params._id as string)
-  }, [loaderData])
+  }, [params._id])
+  if (isLoading) {
+    return <PageLoader />
 
+  }
   return (
     <>
       <ChatHeader />
@@ -59,7 +73,7 @@ export default function ChatMessages({ loaderData }: Route.ComponentProps) {
           <MessagesList messages={Socket.messages} currentUserId={Socket.senderId} />
 
         ) : (
-          <NoChatHistoryPlaceholder />
+          <NoChatHistoryPlaceholder name={loaderData.partners.fullName} />
         )}
       </div>
       <MessageForm />

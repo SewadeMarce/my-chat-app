@@ -1,7 +1,7 @@
-import { Link, useAsyncValue,  } from "react-router";
+import { Link, useAsyncValue, } from "react-router";
 import type { userType } from "~/types";
 
-function ContactList({ onlineUsers, }: { onlineUsers?: string[] }) {
+function ContactList({ onlineUsers, onClose }: { onlineUsers?: string[], onClose?: () => void }) {
   const contacts = useAsyncValue() as userType[]
 
   return (
@@ -11,6 +11,7 @@ function ContactList({ onlineUsers, }: { onlineUsers?: string[] }) {
           key={contact._id}
           className="bg-cyan-500/10 p-4 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors"
           to={`${contact._id}`}
+          onClick={onClose}
         >
           <div className="flex items-center gap-3">
             <div className={`avatar ${onlineUsers?.includes(contact._id) ? "online" : "offline"}`}>
